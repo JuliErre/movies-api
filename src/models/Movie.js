@@ -19,4 +19,4 @@ const movieSchema = new Schema({
 })
 
 
-module.exports = {movies :model('movies', movieSchema), watchlist: model('watchlist', movieSchema)};
+module.exports = {movies :model('movies', movieSchema)};

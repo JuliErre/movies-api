@@ -5,6 +5,19 @@ const { encryptPassword, comparePassword } = require("../helpers/handleBcrypt");
 const register = async (req, res) => {
     try {
         const { email, password, name } = req.body;
+
+        if (!email || !password || !name) {
+            return res.status(400).send({msg:"Please enter all fields"});
+        }
+
+        const userExists = await user.findOne({
+            email,
+        });
+
+        if (userExists) {
+            return res.status(400).send({msg:"User already exists"});
+        }
+
         const passwordHash = await encryptPassword(password);
 
         const date = new Date();
@@ -19,6 +32,7 @@ const register = async (req, res) => {
             userId: register._id,
             movies: [],
         })
+
         const sendData = await res.send(register);
         return sendData;
     } catch (err) {

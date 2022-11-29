@@ -4,7 +4,7 @@ const { movies } = require("../models/Movie");
 const  getUserWatchlist = async (req, res) => {
     try{
         const { id } = req.params;
-        const userWatchlist = await watchlist.find({ userId: id });
+        const userWatchlist = await watchlist.findOne({ userId: id });
         res.send(userWatchlist);
     }
     catch (err) {

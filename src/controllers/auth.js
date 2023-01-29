@@ -1,6 +1,7 @@
 const user = require("../models/User");
 const watchList = require("../models/WatchList")
 const { encryptPassword, comparePassword } = require("../helpers/handleBcrypt");
+const { tokenSign, verifyToken } = require("../helpers/generateToken");
 
 const register = async (req, res) => {
     try {
@@ -55,8 +56,10 @@ const login = async (req, res) => {
             userLogin.password
         );
 
+        const token = await tokenSign(userLogin);
+
         if (checkPassword) {
-            return res.send({id : userLogin._id, name : userLogin.name});
+            return res.send({data:{id : userLogin._id, name : userLogin.name}, token});
         }
 
         return res.status(400).send("Password is incorrect");

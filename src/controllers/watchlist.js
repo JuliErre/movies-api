@@ -32,7 +32,9 @@ const addMovieToWatchlist = async (req, res) => {
 
 const removeMovieFromWatchlist = async (req, res) => {
     try {
+        
         const { movieId, userId } = req.body;
+        console.log(movieId," ", userId);
         const userWatchlist = await watchlist.findOne
         ({ userId: userId});
         const movie = userWatchlist.movies.find((movie) => movie.id === movieId);

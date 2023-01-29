@@ -28,6 +28,7 @@ const register = async (req, res) => {
             name,
             createdAt: new Date(),
             updatedAt: new Date(),
+            photo: "https://art-gallery-latam.api.hbo.com/images/a286cb57-fee3-45b1-a9c0-b9fabe519bfb/avatar?size=250x250&format=png",
         });
         const createUserWl = await watchList.create({
             userId: register._id,
@@ -59,7 +60,7 @@ const login = async (req, res) => {
         const token = await tokenSign(userLogin);
 
         if (checkPassword) {
-            return res.send({data:{id : userLogin._id, name : userLogin.name}, token});
+            return res.send({data:{id : userLogin._id, name : userLogin.name, photo: userLogin.photo}, token});
         }
 
         return res.status(400).send("Password is incorrect");

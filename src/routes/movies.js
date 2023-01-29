@@ -2,6 +2,7 @@ require("../database");
 const express = require("express");
 const { register, login } = require("../controllers/auth");
 const { getMovies, getMovieById, search, getMoviesbyGenre } = require("../controllers/movies");
+const { updatePhoto } = require("../controllers/user");
 const { getUserWatchlist, addMovieToWatchlist, removeMovieFromWatchlist } = require("../controllers/watchlist");
 const router = express.Router();
 
@@ -23,6 +24,8 @@ router.delete("/watchlist", removeMovieFromWatchlist);
 router.post("/register", register)
 
 router.post("/login", login)
+
+router.patch("/photo", updatePhoto)
 
 
 module.exports = router;

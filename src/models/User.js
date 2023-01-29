@@ -7,6 +7,7 @@ const userDataScheme = new Schema({
     name: String,
     createdAt: Date,
     updatedAt: Date,
+    photo: String,
 })
 
 

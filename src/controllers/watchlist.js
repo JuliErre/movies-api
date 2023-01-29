@@ -4,7 +4,7 @@ const { movies } = require("../models/Movie");
 const  getUserWatchlist = async (req, res) => {
     try{
         const { id } = req.params;
-        const userWatchlist = await watchlist.find({ userId: id });
+        const userWatchlist = await watchlist.findOne({ userId: id });
         res.send(userWatchlist);
     }
     catch (err) {
@@ -32,7 +32,9 @@ const addMovieToWatchlist = async (req, res) => {
 
 const removeMovieFromWatchlist = async (req, res) => {
     try {
+        
         const { movieId, userId } = req.body;
+        console.log(movieId," ", userId);
         const userWatchlist = await watchlist.findOne
         ({ userId: userId});
         const movie = userWatchlist.movies.find((movie) => movie.id === movieId);

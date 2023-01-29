@@ -12,7 +12,7 @@ const getMovies = async (req, res) => {
 const getMovieById = async (req, res) => {
     try {
         const { id } = req.params;
-        const movie = await movies.find({ id: id });
+        const movie = await movies.findOne({ id: id });
         res.send(movie);
     } catch (err) {
         console.log(err);

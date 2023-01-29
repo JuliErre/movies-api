@@ -1,14 +1,10 @@
-const mongoose = require('mongoose');
-const connectionString = `mongodb+srv://julierre:xL2gNcauPUzFIqB1@cluster0.qlfos6l.mongodb.net/bd?retryWrites=true&w=majority`
+const mongoose = require("mongoose");
 
-mongoose.connect(connectionString)
-.then(() => console.log('MongoDB connected...'))
-.catch(err => console.log(err));
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
 
-
-
-
-
-
-
-
+mongoose
+    .connect(process.env.MONGODB_URI)
+    .then(() => console.log("MongoDB connected..."))
+    .catch((err) => console.log(err));
